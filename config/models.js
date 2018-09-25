@@ -37,7 +37,7 @@ module.exports.models = {
 
   schema: true,
   // datastore: 'test',
-
+  // adapter: 'sails-postgresql'
   /***************************************************************************
   *                                                                          *
   * How and whether Sails will attempt to automatically rebuild the          *

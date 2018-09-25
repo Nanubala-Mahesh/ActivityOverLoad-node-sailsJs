@@ -7,8 +7,6 @@
 
 module.exports = {
   
-
-
   // Create a product
   create(req,res) {
     
