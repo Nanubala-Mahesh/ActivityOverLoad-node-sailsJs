@@ -32,7 +32,7 @@ module.exports.datastores = {
   *                                                                          *
   ***************************************************************************/
 
-  default: {
+  // default: {
 
     /***************************************************************************
     *                                                                          *
@@ -56,10 +56,10 @@ module.exports.datastores = {
       host: 'localhost',
       user: 'mahesh',
       password: '123456',
-      database: 'activiryoverload'
+      database: 'test'
     }
 
-  },
+  // },
 
   
 

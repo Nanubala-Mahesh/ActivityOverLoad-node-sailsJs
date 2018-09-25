@@ -55,5 +55,10 @@ module.exports.routes = {
   //  ║║║║╚═╗║
   //  ╩ ╩╩╚═╝╚═╝
 
-
+  // custom routes
+  'POST /products' : 'ProductController.create',
+  'GET /products' : 'ProductController.find',
+  'PUT /products/:id' : 'ProductController.update',
+  'DELETE /products/:id' : 'ProductController.delete',
+  'GET /products/:id' : 'ProductController.show'
 };
