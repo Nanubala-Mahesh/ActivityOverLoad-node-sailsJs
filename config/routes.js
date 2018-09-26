@@ -63,9 +63,22 @@ module.exports.routes = {
   'GET /products' : 'ProductController.find',
   'PUT /products/:id' : 'ProductController.update',
   'DELETE /products/:id' : 'ProductController.delete',
-  'GET /products/:id' : 'ProductController.show'
+  'GET /products/:id' : 'ProductController.show',
+
+  // users routes
+  'POST /users' : 'UserController.create',
+  'GET /users' : 'UserController.find',
+  'PUT /users/:id' : 'UserController.update',
+  'DELETE /users/:id' : 'UserController.delete',
+  'GET /users/:id' : 'UserController.show',
 
 
+  // tasks routes
+  'POST /tasks' : 'TaskController.create',
+  'GET /tasks' : 'TaskController.find',
+  'PUT /tasks/:id' : 'TaskController.update',
+  'DELETE /tasks/:id' : 'TaskController.delete',
+  'GET /tasks/:id' : 'TaskController.show',
 
 
 
