@@ -15,9 +15,15 @@ module.exports = {
     },
     password: {
       type: 'string',
-      required: true
+      required: true,
+      protected: true,
+      minLength: 6,
+      columnName: "encryptedPassword"
     },
-
+    toJSON: () => {
+	    var obj = this.toObject()
+	    delete obj.password
+    },
     
     // user has many tasks
     
