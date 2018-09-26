@@ -81,6 +81,22 @@ module.exports.routes = {
   'GET /tasks/:id' : 'TaskController.show',
 
 
-
+  // Auth
+  // 'GET /login': {
+  //   controller: 'AuthController',
+  //   action: 'login'
+  // },
+  'POST /login': {
+    controller: 'AuthController',
+    action: 'login'
+  },
+  'POST /register': {
+    controller: 'AuthController',
+    action: 'register'
+  },
+  'GET /logout': {
+    controller: 'AuthController',
+    action: 'logout'
+  }
 
 };

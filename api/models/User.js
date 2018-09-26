@@ -5,6 +5,9 @@
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
  */
 
+var bcrypt = require('bcrypt-nodejs');
+
+
 module.exports = {
 
   attributes: {
@@ -16,14 +19,13 @@ module.exports = {
     password: {
       type: 'string',
       required: true,
-      protected: true,
+      // protected: true,
       minLength: 6,
       columnName: "encryptedPassword"
     },
-    toJSON: () => {
-	    var obj = this.toObject()
-	    delete obj.password
-    },
+    // override default toJSON
+    
+
     
     // user has many tasks
     
@@ -31,21 +33,29 @@ module.exports = {
       collection: 'Task',
       via: 'users'
     }
-    //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
-    //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
-    //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-
-
-    //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
-    //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
-    //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-
-
-    //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
-    //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
-    //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
   },
+
+  json: function() {
+    var obj = this.toObject();
+    delete obj.password;
+    return obj;
+  },
+
+  beforeCreate: function(user, cb) {
+    bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(user.password, salt, null, function(err, hash) {
+          if(err) {
+              console.log(err);
+              return cb(err);
+          } else {
+              user.password = hash;
+              console.log(hash);
+              return cb(null, user);
+          }
+        });
+    });
+  }
 
 };
 
