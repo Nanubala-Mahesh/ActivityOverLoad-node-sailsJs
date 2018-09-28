@@ -23,7 +23,13 @@ module.exports = {
       minLength: 6,
       columnName: "encryptedPassword"
     },
-    // override default toJSON
+    mobile: {
+      type: 'number',
+      required: true 
+    },
+    token: {
+      type: 'string'
+    },
     
 
     
@@ -36,6 +42,8 @@ module.exports = {
 
   },
 
+  // override default toJSON
+    
   json: function() {
     var obj = this.toObject();
     delete obj.password;
@@ -46,12 +54,12 @@ module.exports = {
     bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(user.password, salt, null, function(err, hash) {
           if(err) {
-              console.log(err);
-              return cb(err);
+            console.log(err);
+            return cb(err);
           } else {
-              user.password = hash;
-              console.log(hash);
-              return cb(null, user);
+            user.password = hash;
+            console.log('bcrypt hash', hash);
+            return cb(null, user);
           }
         });
     });
