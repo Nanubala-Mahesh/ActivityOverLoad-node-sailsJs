@@ -14,9 +14,12 @@ module.exports = {
 		if (req.body.password !== req.body.confirmPassword) {
 		  return ResponseService.json(401, res, "Password doesn't match")
 		}
-	
+		
+		
+		
+
 		var allowedParameters = [
-		  "id", "email", "mobile", "password"
+		  "id", "email", "mobile", "password", "token"
 		]
 		var data = _.pick(req.body, allowedParameters);
 		console.log('data', data);
@@ -29,6 +32,14 @@ module.exports = {
 				user: user,
 				token: JwtService.issue({id: user.id})
 			}
+
+			User.update({id: user.id}).set({token: responseData.token }).then(users => {
+				    console.log('update token0000000000000000000', users);
+				  }).catch((err)=>{
+						console.log('error token0000000000000000000',err);
+						
+					})
+
 			return ResponseService.json(200, res, "User created successfully", responseData)
 		})
 		.catch(function (error) {
@@ -103,99 +114,4 @@ function generateToken(user_id) {
 
 
 
-
-
-
-
-
-
-
-
-//   login: function(req, res) {
-//       res.view();
-//   },
-//   process: function(req, res) {
-//       passport.authenticate('local', function(err, user, info) {
-		
-//         if( (err)||(!user) ) {
-//           return res.send({
-//               message: 'login failed'
-//           });
-//           res.send(err);
-//         }
-
-//         req.logIn(user, function(err) {
-//           console.log('**************', user);
-//           console.log('**************', err);
-			   
-//             if(err) res.send(err);
-//             return res.send({
-//                 message: 'login successful'
-//             });
-//         });
-//       }) (req, res);
-//   },
-
-//   logout: function(req, res) {
-//       req.logOut();
-//       res.send('logout successful');
-//   }
-// };
-
-// module.exports.blueprints = {
-//     actions: true,
-//     rest: true,
-//     shortcuts: true
-// };
-
-
-	// login function
-	// login: function (req, res) {
-	//     //   checking validations
-	//     data = {
-	//         email: req.body.email,
-	//         password: req.body.password
-	//     }
-
-	//     User.create(data).fetch().exec(function (err, user) {
-	//         if (err) {
-	//             return res.negoiate(err);
-	//         }
-	//         req.login(user, function (err) {
-	//             if (err) {
-	//                 return res.negoiate(err);
-	//             }
-
-	//             sails.log(`user ${user.id} has logged in`);
-	//             return res.send({
-	//                 message: 'login successful',
-	//                 user
-	//             })
-
-	//         })
-	//     })
-	// },
-
-	// login: function(req, res) {
-	//     passport.authenticate('local', function(err, user, info) {
-	//         if(err || !user){
-	//             sails.log(`user ${err} has logged in`);
-				
-	//             return res.send({message: 'message', user});
-	//         }
-	//         req.logIn(user, function(err) {
-	//             if (err) res.send(err);
-	//             sails.log(`user ${user.id} has logged in`);
-
-	//             return res.send({message: 'info.message', user});
-
-	//         })
-	//     })(req,res);
-	// },
-
-	// // logout function
-	// logout: function (req, res) {
-	//     req.logout();
-	//     res.send('logout successful');
-	// },
 
