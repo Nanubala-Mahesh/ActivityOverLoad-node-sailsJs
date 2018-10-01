@@ -72,6 +72,15 @@ module.exports.routes = {
   'DELETE /users/:id' : 'UserController.delete',
   'GET /users/:id' : 'UserController.show',
 
+  // userProfile routes
+  'POST /profiles' : 'UserProfileController.create',
+  'GET /profiles' : 'UserProfileController.find',
+  'PUT /profiles/:id' : 'UserProfileController.update',
+  'DELETE /profiles/:id' : 'UserProfileController.delete',
+  'GET /profiles/:id' : 'UserProfileController.show',
+
+  'POST /profiles/upload' : 'UserProfileController.upload',
+
 
   // tasks routes
   'POST /tasks' : 'TaskController.create',

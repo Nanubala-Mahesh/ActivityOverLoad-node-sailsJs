@@ -32,6 +32,11 @@ module.exports = {
     },
     
 
+    // user has one userprofile
+
+    UserProfile: {
+      model: "UserProfile"
+    },
     
     // user has many tasks
     
